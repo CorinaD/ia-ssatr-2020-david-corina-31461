@@ -51,6 +51,7 @@ public class TestTrack {
         track1.addCar(new ElectricCar("Tesla 2", 0));
         track1.addCar(new DieselCar("Tesla 2", 0));
         track1.addCar(new DieselCar("Tesla 2", 0));
+        track1.addCar(new OttoCar("Tesla 3", 0));
         
         track1.testAccelerate(4);
         
