@@ -40,16 +40,16 @@ public class TestCar {
 //        
         // -> Vehicle speed is 3
         
-        DieselCar d1 = new DieselCar("Audi", 5);
+        DieselCar d1 = new DieselCar("Audi", 5, "AB12WOP");
         d1.accelerate();
         
-        ElectricCar e1 = new ElectricCar("Nissan", 0);
+        ElectricCar e1 = new ElectricCar("Nissan", 0, "MM12WOP");
         e1.accelerate();
         
-        OttoCar oc = new OttoCar("Masina Otto", 2);
+        OttoCar oc = new OttoCar("Masina Otto", 2, "BN12WOP");
         oc.accelerate();
         
-        Car x1 = new DieselCar("Dacia",1);
+        Car x1 = new DieselCar("Dacia", 1, "CJ12WOP");
         x1.accelerate();
         
         
