@@ -11,7 +11,6 @@ package com.mycompany.lab3_ex6;
 import java.net.*;
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,8 +19,11 @@ public class Server {
    
     //declarare si initializare interfata grafica
     //declar lista care stocheaza inregistrarile 
-     ArrayList<CarAccess> list = new ArrayList<>();
-     public static final int UNIT_PRICE = 1; 
+    
+    ServerJFrame f = new ServerJFrame();
+    ArrayList<CarAccess> list = new ArrayList<>();
+    
+    public static final int UNIT_PRICE = 1; 
      
     private int computeParkingStayPrice(long entryTime){
         //1 LEU / secunda 
@@ -55,12 +57,24 @@ public class Server {
             list.remove(index);
         }
         
-        //acces la interfata grafica (pentru exercitiul 7)    
+       f.setVisible(true);
+       f.showAllCars(getAllCarsDetails());
             
-        return message;
+       return message;
     }
-    
-    
+       
+    String getAllCarsDetails(){
+       String all = "";
+       for(CarAccess ca: list){ 
+           if(ca!=null){
+             
+            SimpleDateFormat sdf = new SimpleDateFormat("MMM-dd-yyyy HH:mm");
+            Date resultdate = new Date(ca.getAccessTime());
+            all += "Car " + ca.getPlateNumber() + " at time " + sdf.format(resultdate) + "\n";
+           }
+       }
+       return all;
+   }
     
     void startServer() throws IOException{
         //....
@@ -94,25 +108,25 @@ public class Server {
     }
     
     public static void main(String[] args) throws IOException, InterruptedException {
-        Server s = new Server();
+       Server s = new Server();
+          
+        String x = s.handlePlateNumberRequest("AB-01-AAA");
+        System.out.println(x);
+        Thread.sleep(2000);
+        
+        s.list.add(new CarAccess("AB-01-ABC", System.currentTimeMillis()));
+        x = s.handlePlateNumberRequest("AB-01-AAA");
+        System.out.println(x);
+        Thread.sleep(2000);
+        
+        s.list.add(new CarAccess("AB-01-BBB", System.currentTimeMillis()));
+        x = s.handlePlateNumberRequest("AB-01-AAA");
+        System.out.println(x);
+        Thread.sleep(2000);
+        
+        x = s.handlePlateNumberRequest("AB-01-ABC");
+        System.out.println(x);
+        
         s.startServer();
-        
-        
-//        String x = s.handlePlateNumberRequest("AB-01-AAA");
-//        System.out.println(x);
-//        Thread.sleep(2000);
-//        
-//        s.list.add(new CarAccess("AB-01-ABC", System.currentTimeMillis()));
-//        x = s.handlePlateNumberRequest("AB-01-AAA");
-//        System.out.println(x);
-//        Thread.sleep(2000);
-//        
-//        s.list.add(new CarAccess("AB-01-BBB", System.currentTimeMillis()));
-//        x = s.handlePlateNumberRequest("AB-01-AAA");
-//        System.out.println(x);
-//        Thread.sleep(2000);
-//        
-//        x = s.handlePlateNumberRequest("AB-01-ABC");
-//        System.out.println(x);
     }
 }
